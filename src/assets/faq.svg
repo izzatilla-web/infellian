@@ -1,0 +1,73 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000" width="100%" height="100%">
+  <defs>
+    <!-- Dark Background Radial Glow -->
+    <radialGradient id="faqBgGlow" cx="50%" cy="40%" r="70%">
+      <stop offset="0%" stop-color="#ff5500" stop-opacity="0.25"/>
+      <stop offset="60%" stop-color="#141414" stop-opacity="1"/>
+      <stop offset="100%" stop-color="#080808" stop-opacity="1"/>
+    </radialGradient>
+
+    <!-- Orange Gradient -->
+    <linearGradient id="faqOrange" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ff7722"/>
+      <stop offset="100%" stop-color="#cc3300"/>
+    </linearGradient>
+
+    <radialGradient id="faqCore" cx="35%" cy="35%" r="65%">
+      <stop offset="0%" stop-color="#ffaa66"/>
+      <stop offset="50%" stop-color="#ff5500"/>
+      <stop offset="100%" stop-color="#991100"/>
+    </radialGradient>
+
+    <!-- Neon Glow Filter -->
+    <filter id="neonGlowFaq" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="24" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+
+    <filter id="shadowFaq" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="20" stdDeviation="30" flood-color="#000000" flood-opacity="0.8"/>
+    </filter>
+  </defs>
+
+  <!-- Background Base -->
+  <rect width="1000" height="1000" fill="url(#faqBgGlow)"/>
+
+  <!-- Minimal Tech Grid Lines -->
+  <g stroke="#ffffff" stroke-opacity="0.04" stroke-width="1.5">
+    <path d="M0 250 H1000 M0 500 H1000 M0 750 H1000" />
+    <path d="M250 0 V1000 M500 0 V1000 M750 0 V1000" />
+  </g>
+
+  <!-- 3D Geometric FAQ Composition -->
+  <g filter="url(#shadowFaq)">
+    <!-- Floating Back Matte Box -->
+    <rect x="220" y="240" width="280" height="280" rx="36" fill="#1c1c1c" stroke="#333333" stroke-width="2" transform="rotate(-15 360 380)"/>
+
+    <!-- Glassmorphic FAQ Card -->
+    <rect x="360" y="320" width="440" height="440" rx="40" fill="#222222" fill-opacity="0.75" stroke="#ffffff" stroke-opacity="0.2" stroke-width="2" transform="rotate(8 580 540)"/>
+
+    <g transform="rotate(8 580 540)">
+      <!-- Sleek Glowing Question Mark Symbol -->
+      <path d="M520 400 C520 350 640 350 640 430 C640 480 580 500 580 560" fill="none" stroke="url(#faqOrange)" stroke-width="28" stroke-linecap="round" filter="url(#neonGlowFaq)"/>
+      <circle cx="580" cy="630" r="16" fill="url(#faqOrange)" filter="url(#neonGlowFaq)"/>
+
+      <!-- Accent Lines & Tags inside Card -->
+      <rect x="410" y="370" width="60" height="10" rx="5" fill="#ffffff" fill-opacity="0.3"/>
+      <rect x="410" y="395" width="40" height="8" rx="4" fill="#ff5500" fill-opacity="0.6"/>
+    </g>
+
+    <!-- Floating 3D Glowing Core Sphere -->
+    <circle cx="280" cy="680" r="85" fill="url(#faqCore)" filter="url(#neonGlowFaq)"/>
+
+    <!-- Small Floating Accent Nodes -->
+    <circle cx="780" cy="260" r="35" fill="#242424" stroke="#ffffff" stroke-opacity="0.3" stroke-width="2"/>
+    <circle cx="780" cy="260" r="12" fill="#ff5500"/>
+  </g>
+
+  <!-- Connecting Node Lines -->
+  <path d="M280,680 Q450,750 580,710" fill="none" stroke="#ff5500" stroke-width="2" stroke-dasharray="6 6" opacity="0.6"/>
+</svg>

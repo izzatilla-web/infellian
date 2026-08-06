@@ -1,0 +1,74 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1000" width="100%" height="100%">
+  <defs>
+    <radialGradient id="bgGlowMob" cx="65%" cy="45%" r="75%">
+      <stop offset="0%" stop-color="#ff5500" stop-opacity="0.25"/>
+      <stop offset="55%" stop-color="#141414" stop-opacity="1"/>
+      <stop offset="100%" stop-color="#080808" stop-opacity="1"/>
+    </radialGradient>
+
+    <linearGradient id="mobGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ff6611"/>
+      <stop offset="100%" stop-color="#991100"/>
+    </linearGradient>
+
+    <filter id="neonGlow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="25" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="25" stdDeviation="35" flood-color="#000000" flood-opacity="0.8"/>
+    </filter>
+  </defs>
+
+  <rect width="1600" height="1000" fill="url(#bgGlowMob)"/>
+
+  <!-- Minimalist Grid -->
+  <g stroke="#ffffff" stroke-opacity="0.03" stroke-width="1.5">
+    <path d="M0 250 H1600 M0 500 H1600 M0 750 H1600" />
+    <path d="M400 0 V1000 M800 0 V1000 M1200 0 V1000" />
+  </g>
+
+  <!-- 3D Mobile & Platform Geometric Elements -->
+  <g filter="url(#shadow)">
+    <!-- Back Platform Card -->
+    <rect x="750" y="240" width="550" height="520" rx="30" fill="#1d1d1d" stroke="#333333" stroke-width="2" transform="rotate(8 1025 500)"/>
+
+    <!-- Front Floating Mobile Screen Frame Slab -->
+    <rect x="420" y="180" width="340" height="640" rx="48" fill="#121212" stroke="#ffffff" stroke-opacity="0.25" stroke-width="3" transform="rotate(-12 590 500)"/>
+
+    <g transform="rotate(-12 590 500)">
+      <!-- Dynamic Island Notch -->
+      <rect x="540" y="205" width="100" height="24" rx="12" fill="#000000"/>
+
+      <!-- App Header Card -->
+      <rect x="450" y="250" width="280" height="140" rx="20" fill="url(#mobGrad)" filter="url(#neonGlow)"/>
+      <circle cx="490" cy="290" r="16" fill="#ffffff" fill-opacity="0.8"/>
+      <rect x="520" y="285" width="120" height="10" rx="5" fill="#ffffff"/>
+      <rect x="490" y="340" width="140" height="18" rx="6" fill="#ffffff"/>
+
+      <!-- App Widgets -->
+      <rect x="450" y="410" width="132" height="120" rx="18" fill="#222222" stroke="#ffffff" stroke-opacity="0.1" stroke-width="1.5"/>
+      <circle cx="485" cy="445" r="14" fill="#ff5500"/>
+      <rect x="475" y="480" width="80" height="8" rx="4" fill="#ffffff" fill-opacity="0.6"/>
+
+      <rect x="598" y="410" width="132" height="120" rx="18" fill="#222222" stroke="#ffffff" stroke-opacity="0.1" stroke-width="1.5"/>
+      <circle cx="633" cy="445" r="14" fill="#00cc66"/>
+      <rect x="623" y="480" width="80" height="8" rx="4" fill="#ffffff" fill-opacity="0.6"/>
+
+      <!-- Bottom Nav Bar -->
+      <rect x="450" y="745" width="280" height="45" rx="22" fill="#1e1e1e" stroke="#333333" stroke-width="1"/>
+      <circle cx="510" cy="767" r="8" fill="#ff5500"/>
+      <circle cx="590" cy="767" r="8" fill="#ffffff" fill-opacity="0.4"/>
+      <circle cx="670" cy="767" r="8" fill="#ffffff" fill-opacity="0.4"/>
+    </g>
+
+    <!-- Floating Connection Nodes -->
+    <path d="M720,400 C860,350 940,550 1100,480" fill="none" stroke="#ff5500" stroke-width="3" stroke-dasharray="8 8" filter="url(#neonGlow)"/>
+    <circle cx="1100" cy="480" r="12" fill="#ff5500" filter="url(#neonGlow)"/>
+    <circle cx="1200" cy="650" r="50" fill="#242424" stroke="#ffffff" stroke-opacity="0.2" stroke-width="2"/>
+  </g>
+</svg>

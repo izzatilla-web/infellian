@@ -1,0 +1,70 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1000" width="100%" height="100%">
+  <defs>
+    <radialGradient id="bgGlowCrm" cx="40%" cy="50%" r="75%">
+      <stop offset="0%" stop-color="#ff5500" stop-opacity="0.22"/>
+      <stop offset="50%" stop-color="#161616" stop-opacity="1"/>
+      <stop offset="100%" stop-color="#0a0a0a" stop-opacity="1"/>
+    </radialGradient>
+
+    <linearGradient id="barGlow1" x1="0%" y1="100%" x2="0%" y2="0%">
+      <stop offset="0%" stop-color="#1f1f1f"/>
+      <stop offset="100%" stop-color="#ff5500"/>
+    </linearGradient>
+
+    <linearGradient id="barGlow2" x1="0%" y1="100%" x2="0%" y2="0%">
+      <stop offset="0%" stop-color="#2a2a2a"/>
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0.8"/>
+    </linearGradient>
+
+    <filter id="neonGlow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="25" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="20" stdDeviation="30" flood-color="#000000" flood-opacity="0.75"/>
+    </filter>
+  </defs>
+
+  <rect width="1600" height="1000" fill="url(#bgGlowCrm)"/>
+
+  <!-- Minimal Grid Background -->
+  <g stroke="#ffffff" stroke-opacity="0.03" stroke-width="1.5">
+    <path d="M0 250 H1600 M0 500 H1600 M0 750 H1600" />
+    <path d="M400 0 V1000 M800 0 V1000 M1200 0 V1000" />
+  </g>
+
+  <!-- 3D Bar Graph Pillars & Geometric Cards -->
+  <g filter="url(#shadow)">
+    <!-- Base Plate Platform -->
+    <polygon points="350,680 800,850 1250,680 800,510" fill="#181818" stroke="#333333" stroke-width="2"/>
+
+    <!-- Pillar 1 -->
+    <polygon points="500,600 580,630 580,380 500,350" fill="url(#barGlow1)"/>
+    <polygon points="580,630 660,600 660,350 580,380" fill="#cc4400"/>
+    <polygon points="500,350 580,380 660,350 580,320" fill="#ff7733"/>
+
+    <!-- Pillar 2 (Tallest Orange Glow) -->
+    <polygon points="720,680 800,710 800,240 720,210" fill="url(#barGlow1)" filter="url(#neonGlow)"/>
+    <polygon points="800,710 880,680 880,210 800,240" fill="#ff5500"/>
+    <polygon points="720,210 800,240 880,210 800,180" fill="#ffaa66"/>
+
+    <!-- Pillar 3 -->
+    <polygon points="940,600 1020,630 1020,440 940,410" fill="url(#barGlow2)"/>
+    <polygon points="1020,630 1100,600 1100,410 1020,440" fill="#888888"/>
+    <polygon points="940,410 1020,440 1100,410 1020,380" fill="#ffffff"/>
+
+    <!-- Floating Glass Metric Card -->
+    <rect x="300" y="240" width="280" height="150" rx="20" fill="#222222" fill-opacity="0.6" stroke="#ffffff" stroke-opacity="0.2" stroke-width="1.5" transform="rotate(-6 440 310)"/>
+    <circle cx="350" cy="290" r="16" fill="#ff5500"/>
+    <rect x="380" y="280" width="140" height="10" rx="5" fill="#ffffff" fill-opacity="0.8"/>
+    <rect x="380" y="300" width="90" height="8" rx="4" fill="#ffffff" fill-opacity="0.4"/>
+
+    <!-- Growth Curve Path Line -->
+    <path d="M540,320 Q800,140 1060,380" fill="none" stroke="#ff5500" stroke-width="4" stroke-linecap="round" filter="url(#neonGlow)"/>
+    <circle cx="800" cy="180" r="8" fill="#ffffff" filter="url(#neonGlow)"/>
+  </g>
+</svg>
