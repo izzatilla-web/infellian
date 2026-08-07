@@ -16,7 +16,8 @@ type Plan = {
 };
 
 export function Pricing() {
-  const { t } = useI18n();
+  const { t, language } = useI18n();
+  const ru = language === "ru";
   const plans: Plan[] = [
     {
       name: t.pricing.plans[0]!.name,
@@ -68,7 +69,12 @@ export function Pricing() {
       <div className="grid gap-8 lg:grid-cols-2">
         <div className="flex gap-4">
           <SectionLabel>{t.pricing.label}</SectionLabel>
-          <h2 className="display text-6xl md:text-7xl">
+          <h2
+            className={cn(
+              "display",
+              ru ? "text-5xl md:text-6xl" : "max-[400px]:text-5xl text-6xl md:text-7xl",
+            )}
+          >
             {t.pricing.titleLine1}
             <br />
             {t.pricing.titleLine2}

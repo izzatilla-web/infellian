@@ -285,11 +285,14 @@ export const uz: Translation = {
     titleLine2: "tatbiq etamiz",
     intro:
       "G'oyangizdan tortib to'liq tayyor IT mahsulotgacha — biz biznesingiz uchun avtomatlashtirish, CRM, veb va mobil platformalarni sifat va kafolat bilan quramiz.",
-    placeholder: "Emailingizni kiriting",
+    namePlaceholder: "Ismingiz",
+    phonePlaceholder: "+998 90 123 45 67",
     cta: "Boshlash",
     marquee: "Keling, birga quramiz",
-    emailLabel: "Elektron pochta manzili",
-    invalidEmail: "Iltimos, to'g'ri elektron pochta manzilini kiriting.",
+    nameLabel: "Ismingiz",
+    phoneLabel: "Telefon raqami",
+    invalidName: "Iltimos, ismingizni kiriting.",
+    invalidPhone: "Iltimos, to'g'ri telefon raqamini kiriting.",
     success: "Rahmat! Bir ish kuni ichida siz bilan bog'lanamiz.",
   },
   footer: {

@@ -1,8 +1,10 @@
 import { SectionLabel } from "./primitives";
 import { useI18n } from "@/i18n/i18n";
+import { cn } from "@/lib/utils";
 
 export function Numbers() {
-  const { t } = useI18n();
+  const { t, language } = useI18n();
+  const ru = language === "ru";
   const stats = [
     {
       value: "50",
@@ -46,7 +48,12 @@ export function Numbers() {
         <div className="grid gap-8 lg:grid-cols-2">
           <div className="flex flex-col gap-4">
             <SectionLabel>{t.numbers.label}</SectionLabel>
-            <h2 className="display tracking-wide text-6xl md:text-7xl">
+            <h2
+              className={cn(
+                "display tracking-wide",
+                ru ? "text-5xl md:text-6xl" : "max-[400px]:text-5xl text-6xl md:text-7xl",
+              )}
+            >
               {t.numbers.titleLine1}
               <br />
               {t.numbers.titleLine2}

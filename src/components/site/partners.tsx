@@ -1,5 +1,6 @@
 import { SectionLabel } from "./primitives";
 import { useI18n } from "@/i18n/i18n";
+import { cn } from "@/lib/utils";
 
 const partnerLogos = [
   { name: "Robivox", src: "/robivox.png" },
@@ -10,21 +11,22 @@ const partnerLogos = [
 ];
 
 export function Partners() {
-  const { t } = useI18n();
+  const { t, language } = useI18n();
+  const ru = language === "ru";
   // Duplicate array for smooth seamless infinite scrolling
-  const carouselItems = [
-    ...partnerLogos,
-    ...partnerLogos,
-    ...partnerLogos,
-    ...partnerLogos,
-  ];
+  const carouselItems = [...partnerLogos, ...partnerLogos, ...partnerLogos, ...partnerLogos];
 
   return (
     <section className="py-16 md:py-24">
       <div className="shell">
         <div className="grid gap-8 lg:grid-cols-2">
           <div className="flex flex-col gap-4">
-            <h2 className="display tracking-wide text-6xl md:text-7xl">
+            <h2
+              className={cn(
+                "display tracking-wide",
+                ru ? "text-5xl md:text-6xl" : "max-[400px]:text-5xl text-6xl md:text-7xl",
+              )}
+            >
               {t.partners.titleLine1}
               <br />
               {t.partners.titleLine2}

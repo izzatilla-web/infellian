@@ -1,9 +1,11 @@
 import teamImg from "/logo.png";
 import { PillButton, SectionLabel } from "./primitives";
 import { useI18n } from "@/i18n/i18n";
+import { cn } from "@/lib/utils";
 
 export function About() {
-  const { t } = useI18n();
+  const { t, language } = useI18n();
+  const ru = language === "ru";
 
   return (
     <section id="about" className="shell scroll-mt-24 py-16 md:py-24">
@@ -11,7 +13,12 @@ export function About() {
         <div>
           <div className="flex flex-col gap-4">
             <SectionLabel>{t.about.label}</SectionLabel>
-            <h2 className="display tracking-wide text-6xl md:text-7xl">
+            <h2
+              className={cn(
+                "display tracking-wide",
+                ru ? "text-5xl md:text-6xl" : "max-[400px]:text-5xl text-6xl md:text-7xl",
+              )}
+            >
               {t.about.titleLine1}
               <br />
               {t.about.titleLine2}

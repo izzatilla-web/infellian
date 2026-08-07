@@ -8,26 +8,88 @@ import c3 from "@/assets/cta-33.jpg";
 import c4 from "@/assets/cta-44.jpg";
 import c5 from "@/assets/cta-55.jpg";
 import { useI18n } from "@/i18n/i18n";
+import { cn } from "@/lib/utils";
+
+/**
+ * Formats a raw digit string into the Uzbek phone format: +998 90 123 45 67.
+ * Handles partial input gracefully so the user always sees a sensible mask.
+ *
+ * The +998 country code is "sticky": when the user backspaces down to it,
+ * further backspaces do nothing (the prefix is preserved), and typing again
+ * resumes from the operator code.
+ */
+function formatPhone(raw: string, prevRaw: string): string {
+  // Keep only digits
+  const digits = raw.replace(/\D/g, "");
+  const prevDigits = prevRaw.replace(/\D/g, "");
+
+  // If empty, return empty
+  if (!digits) return "";
+
+  // Detect whether the user is deleting (input shrank)
+  const isDeleting = digits.length < prevDigits.length;
+
+  // Normalize: if the user typed a leading 8 (common in CIS), convert to 998
+  let d = digits;
+  if (d.startsWith("8") && d.length >= 10) {
+    d = "998" + d.slice(1);
+  }
+
+  // Keep the +998 prefix sticky while deleting — never drop below it
+  if (isDeleting && d.length <= 3) {
+    d = "998";
+  } else if (!d.startsWith("998")) {
+    // Only auto-prepend 998 when typing forward
+    d = "998" + d;
+  }
+
+  // Build the formatted string progressively
+  const country = d.slice(0, 3); // 998
+  const operator = d.slice(3, 5); // 90
+  const part1 = d.slice(5, 8); // 123
+  const part2 = d.slice(8, 10); // 45
+  const part3 = d.slice(10, 12); // 67
+
+  let out = `+${country}`;
+  if (operator) out += ` ${operator}`;
+  if (part1) out += ` ${part1}`;
+  if (part2) out += ` ${part2}`;
+  if (part3) out += ` ${part3}`;
+  return out;
+}
+
+/** Validates a formatted phone string: must be +998 XX XXX XX XX (12 digits). */
+function isValidPhone(phone: string): boolean {
+  const digits = phone.replace(/\D/g, "");
+  return digits.length === 12 && digits.startsWith("998");
+}
 
 export function ContactCta() {
-  const { t } = useI18n();
-  const [email, setEmail] = useState("");
+  const { t, language } = useI18n();
+  const ru = language === "ru";
+  const [name, setName] = useState("");
+  const [phone, setPhone] = useState("");
 
   const submit = (e: FormEvent) => {
     e.preventDefault();
-    if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)) {
-      toast.error(t.contact.invalidEmail);
+    if (!name.trim()) {
+      toast.error(t.contact.invalidName);
+      return;
+    }
+    if (!isValidPhone(phone)) {
+      toast.error(t.contact.invalidPhone);
       return;
     }
     toast.success(t.contact.success);
-    setEmail("");
+    setName("");
+    setPhone("");
   };
 
   return (
     <section id="contact" className="relative scroll-mt-24 overflow-hidden py-20 md:py-28">
       <div className="shell relative">
         <div className="relative mx-auto max-w-2xl text-center">
-          <h2 className="display text-5xl md:text-6xl">
+          <h2 className={cn("display", ru ? "text-4xl md:text-5xl" : "text-5xl md:text-6xl")}>
             {t.contact.titleLine1}
             <br />
             {t.contact.titleLine2}
@@ -38,25 +100,43 @@ export function ContactCta() {
 
           <form
             onSubmit={submit}
-            className="mx-auto mt-8 flex max-w-md items-center gap-2 rounded-xl bg-surface p-1.5"
+            className="mx-auto mt-8 flex max-w-md flex-col gap-2 rounded-xl bg-surface p-1.5"
           >
-            <label className="sr-only" htmlFor="cta-email">
-              {t.contact.emailLabel}
-            </label>
-            <input
-              id="cta-email"
-              type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              placeholder={t.contact.placeholder}
-              className="min-w-0 flex-1 bg-transparent px-3 py-2 text-sm outline-none placeholder:text-muted-foreground"
-            />
-            <button
-              type="submit"
-              className="rounded-lg bg-brand px-4 py-2 text-sm font-medium text-brand-foreground transition-transform hover:-translate-y-0.5"
-            >
-              {t.contact.cta}
-            </button>
+            <div className="flex items-center gap-2">
+              <label className="sr-only" htmlFor="cta-name">
+                {t.contact.nameLabel}
+              </label>
+              <input
+                id="cta-name"
+                type="text"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                placeholder={t.contact.namePlaceholder}
+                autoComplete="name"
+                className="min-w-0 flex-1 bg-transparent px-3 py-2 text-sm outline-none placeholder:text-muted-foreground"
+              />
+            </div>
+            <div className="flex items-center gap-2 border-t border-border/60 pt-1.5">
+              <label className="sr-only" htmlFor="cta-phone">
+                {t.contact.phoneLabel}
+              </label>
+              <input
+                id="cta-phone"
+                type="tel"
+                inputMode="tel"
+                value={phone}
+                onChange={(e) => setPhone(formatPhone(e.target.value, phone))}
+                placeholder={t.contact.phonePlaceholder}
+                autoComplete="tel"
+                className="min-w-0 flex-1 bg-transparent px-3 py-2 text-sm outline-none placeholder:text-muted-foreground"
+              />
+              <button
+                type="submit"
+                className="rounded-lg bg-brand px-4 py-2 text-sm font-medium text-brand-foreground transition-transform hover:-translate-y-0.5"
+              >
+                {t.contact.cta}
+              </button>
+            </div>
           </form>
         </div>
 

@@ -5,16 +5,14 @@ import { useI18n } from "@/i18n/i18n";
 import { cn } from "@/lib/utils";
 
 export function Testimonials() {
-  const { t } = useI18n();
+  const { t, language } = useI18n();
+  const ru = language === "ru";
   const items = t.testimonials.items;
   const [page, setPage] = useState(0);
 
   // 5 partner items paired into 2-card slides
   const totalPages = Math.ceil(items.length / 2);
-  const currentPair = [
-    items[(page * 2) % items.length]!,
-    items[(page * 2 + 1) % items.length]!,
-  ];
+  const currentPair = [items[(page * 2) % items.length]!, items[(page * 2 + 1) % items.length]!];
 
   const move = (dir: 1 | -1) => {
     setPage((p) => (p + dir + totalPages) % totalPages);
@@ -25,7 +23,12 @@ export function Testimonials() {
       <div className="grid gap-8 lg:grid-cols-2">
         <div className="flex flex-col gap-4">
           <SectionLabel>{t.testimonials.label}</SectionLabel>
-          <h2 className="display tracking-wide text-6xl md:text-7xl">
+          <h2
+            className={cn(
+              "display tracking-wide",
+              ru ? "text-5xl md:text-6xl" : "max-[400px]:text-5xl text-6xl md:text-7xl",
+            )}
+          >
             {t.testimonials.titleLine1}
             <br />
             {t.testimonials.titleLine2}

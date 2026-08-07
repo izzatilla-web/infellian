@@ -1,4 +1,5 @@
-import { createContext, useContext, useEffect, useState, type ReactNode } from "react";
+import { createContext, useContext, useEffect, useRef, useState, type ReactNode } from "react";
+import { Check, Languages } from "lucide-react";
 import { en, type Translation } from "./en";
 import { ru } from "./ru";
 import { uz } from "./uz";
@@ -66,6 +67,80 @@ export function useI18n(): I18nContextValue {
     throw new Error("useI18n must be used within an I18nProvider");
   }
   return ctx;
+}
+
+/**
+ * Compact language selector for mobile: a globe button that opens a dropdown
+ * menu with the available languages. Shown only below the lg breakpoint —
+ * desktop keeps the segmented pill `LanguageSwitcher`.
+ */
+export function MobileLanguageSwitcher({ className }: { className?: string }) {
+  const { language, setLanguage } = useI18n();
+  const languages: Language[] = ["en", "ru", "uz"];
+  const [open, setOpen] = useState(false);
+  const ref = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const onDocClick = (e: MouseEvent) => {
+      if (ref.current && !ref.current.contains(e.target as Node)) {
+        setOpen(false);
+      }
+    };
+    const onEsc = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setOpen(false);
+    };
+    document.addEventListener("mousedown", onDocClick);
+    document.addEventListener("keydown", onEsc);
+    return () => {
+      document.removeEventListener("mousedown", onDocClick);
+      document.removeEventListener("keydown", onEsc);
+    };
+  }, []);
+
+  return (
+    <div ref={ref} className={cn("relative", className)}>
+      <button
+        type="button"
+        onClick={() => setOpen((v) => !v)}
+        aria-label="Change language"
+        aria-expanded={open}
+        aria-haspopup="menu"
+        className="flex size-9 items-center justify-center rounded-full border border-border bg-background/60 backdrop-blur transition-colors hover:text-brand"
+      >
+        <Languages className="size-4" />
+      </button>
+
+      {open ? (
+        <div
+          role="menu"
+          aria-label="Language"
+          className="absolute right-0 top-full z-50 mt-2 w-36 overflow-hidden rounded-2xl border border-border bg-background/95 p-1.5 shadow-xl backdrop-blur"
+        >
+          {languages.map((lang) => (
+            <button
+              key={lang}
+              type="button"
+              role="menuitemradio"
+              aria-checked={language === lang}
+              onClick={() => {
+                setLanguage(lang);
+                setOpen(false);
+              }}
+              className={cn(
+                "flex w-full items-center justify-between rounded-xl px-3 py-2 text-sm transition-colors",
+                language === lang
+                  ? "bg-foreground text-background"
+                  : "text-foreground/80 hover:bg-accent hover:text-accent-foreground",
+              )}
+            >
+              {languageNames[lang]}
+              {language === lang ? <Check className="size-4" /> : null}
+            </button>
+          ))}
+        </div>
+      ) : null}
+    </div>
+  );
 }
 
 /** Language selector shown in the navbar, matching the site's pill-button style. */

@@ -11,7 +11,8 @@ import { cn } from "@/lib/utils";
 const serviceImages = [serviceAi, serviceCrm, serviceWeb, serviceMobile];
 
 export function Services() {
-  const { t } = useI18n();
+  const { t, language } = useI18n();
+  const ru = language === "ru";
   const [open, setOpen] = useState(0);
   const services = t.services.items;
 
@@ -21,7 +22,12 @@ export function Services() {
         <div className="grid gap-10 lg:grid-cols-2">
           <div className="flex flex-col gap-4">
             <SectionLabel>{t.services.label}</SectionLabel>
-            <h2 className="display tracking-wide text-6xl md:text-7xl">
+            <h2
+              className={cn(
+                "display tracking-wide",
+                ru ? "text-5xl md:text-6xl" : "max-[400px]:text-5xl text-6xl md:text-7xl",
+              )}
+            >
               {t.services.titleLine1}
               <br />
               {t.services.titleLine2}
@@ -54,7 +60,12 @@ export function Services() {
                 aria-expanded={isOpen}
                 className="shell grid w-full grid-cols-1 items-start gap-4 py-8 text-left md:grid-cols-12 md:py-10"
               >
-                <span className="display text-5xl md:col-span-3 md:text-6xl">
+                <span
+                  className={cn(
+                    "display md:col-span-3",
+                    ru ? "text-4xl md:text-5xl" : "text-5xl md:text-6xl",
+                  )}
+                >
                   {String(i + 1).padStart(2, "0")}
                   <span className="text-brand">.</span>
                 </span>

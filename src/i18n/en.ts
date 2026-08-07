@@ -283,11 +283,14 @@ export const en = {
     titleLine2: "ideas to life",
     intro:
       "From initial concept to production-ready IT products — we build custom automation, CRM, web, and mobile platforms engineered for scale.",
-    placeholder: "Enter your email",
+    namePlaceholder: "Your name",
+    phonePlaceholder: "+998 90 123 45 67",
     cta: "Get Started",
     marquee: "Let's build Together",
-    emailLabel: "Email address",
-    invalidEmail: "Please enter a valid email address.",
+    nameLabel: "Your name",
+    phoneLabel: "Phone number",
+    invalidName: "Please enter your name.",
+    invalidPhone: "Please enter a valid phone number.",
     success: "Thanks! We'll be in touch within one business day.",
   },
   footer: {
