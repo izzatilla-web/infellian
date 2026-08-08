@@ -308,7 +308,7 @@ export const uz: Translation = {
     subscribed: "Siz Infellian yangiliklariga obuna bo'ldingiz.",
   },
   seal: {
-    text: "Keling, hamkorlik qilamiz •• Bosing ••",
+    text: "• Keling, hamkorlik qilamiz •",
   },
   languages: {
     en: "EN",

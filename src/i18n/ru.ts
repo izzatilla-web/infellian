@@ -308,7 +308,7 @@ export const ru: Translation = {
     subscribed: "Вы подписались на рассылку Infellian.",
   },
   seal: {
-    text: "Будем на связи •• Клик ••",
+    text: "• Начните работать с нами •",
   },
   languages: {
     en: "EN",

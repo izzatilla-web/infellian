@@ -30,32 +30,32 @@ export function Work() {
       img: w1,
       title: "Robivox",
       tags: [tags.uiUxDesign, tags.branding, tags.webDevelopment],
-      ratio: "aspect-[4/3]",
+      ratio: "",
     },
     {
       img: w2,
       title: "SAMUR Group",
       tags: [tags.productDesign, tags.motion, tags.webDevelopment],
-      ratio: "aspect-[4/3]",
+      ratio: "",
     },
     {
       img: w3,
       title: "SEO Computer",
       tags: [tags.webDevelopment, tags.visualIdentity],
-      ratio: "aspect-[16/9]",
-      seal: true,
+      ratio: "",
+      seal: false,
     },
     {
       img: w4,
-      title: "Family West",
+      title: "Family Nest",
       tags: [tags.productDesign, tags.webDevelopment, tags.artDirection],
-      ratio: "aspect-[4/3]",
+      ratio: "",
     },
     {
       img: w5,
       title: "BIG Corporation INDUSTRY",
       tags: [tags.brandDevelopment, tags.webDevelopment, tags.webIdentity],
-      ratio: "aspect-square",
+      ratio: "",
     },
   ];
 
@@ -115,16 +115,17 @@ export function Work() {
       </div>
 
       <div className="mt-14 space-y-14">
-        <div className="grid items-start gap-8 md:grid-cols-2">
+        <div className="grid items-start gap-8 md:grid-cols-3">
           <Card project={projects[0]!} className="md:pr-6" />
           <Card project={projects[1]!} className="md:mt-10" />
+         <Card project={projects[2]!} />
         </div>
 
-        <Card project={projects[2]!} />
+        {/* <Card project={projects[2]!} /> */}
 
-        <div className="grid items-start gap-8 md:grid-cols-[1.35fr_1fr]">
-          <Card project={projects[3]!} className="md:mt-10" />
-          <Card project={projects[4]!} />
+        <div className="grid items-start gap-8 md:grid-cols-[1fr_1fr_1fr]">
+          <Card project={projects[3]!} className="" />
+          <Card project={projects[4]!} className="md:mt-10" />
         </div>
       </div>
 
