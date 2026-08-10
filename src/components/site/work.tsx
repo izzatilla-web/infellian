@@ -1,6 +1,4 @@
 /* eslint-disable prettier/prettier */
-import { useState } from "react";
-import { X } from "lucide-react";
 import w1 from "@/assets/project-1.jpg";
 import w2 from "@/assets/project-2.jpg";
 import w3 from "@/assets/project-3.jpg";
@@ -9,7 +7,6 @@ import w5 from "@/assets/project-5.jpg";
 import { PillButton, Seal } from "./primitives";
 import { useI18n } from "@/i18n/i18n";
 import { cn } from "@/lib/utils";
-import { Dialog, DialogClose, DialogContent, DialogTitle } from "@/components/ui/dialog";
 
 type Project = {
   img: string;
@@ -17,13 +14,13 @@ type Project = {
   tags: string[];
   ratio: string;
   seal?: boolean;
+  url: string;
 };
 
 export function Work() {
   const { t, language } = useI18n();
   const ru = language === "ru";
   const tags = t.work.tags;
-  const [selected, setSelected] = useState<Project | null>(null);
 
   const projects: Project[] = [
     {
@@ -31,12 +28,14 @@ export function Work() {
       title: "Robivox",
       tags: [tags.uiUxDesign, tags.branding, tags.webDevelopment],
       ratio: "",
+      url: "http://robivox.ru/",
     },
     {
       img: w2,
       title: "SAMUR Group",
       tags: [tags.productDesign, tags.motion, tags.webDevelopment],
       ratio: "",
+      url: "https://samur.group/",
     },
     {
       img: w3,
@@ -44,29 +43,33 @@ export function Work() {
       tags: [tags.webDevelopment, tags.visualIdentity],
       ratio: "",
       seal: false,
+      url: "https://seo.computer/en",
     },
     {
       img: w4,
       title: "Family Nest",
       tags: [tags.productDesign, tags.webDevelopment, tags.artDirection],
       ratio: "",
+      url: "https://invest.familynest.com/",
     },
     {
       img: w5,
       title: "BIG Corporation INDUSTRY",
       tags: [tags.brandDevelopment, tags.webDevelopment, tags.webIdentity],
       ratio: "",
+      url: "https://aobig.ru/",
     },
   ];
 
   function Card({ project, className }: { project: Project; className?: string }) {
     return (
       <article className={cn("group", className)}>
-        <button
-          type="button"
-          onClick={() => setSelected(project)}
-          className="relative block w-full cursor-zoom-in overflow-hidden rounded-2xl text-left"
-          aria-label={`Open ${project.title} preview`}
+        <a
+          href={project.url}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="relative block w-full cursor-pointer overflow-hidden rounded-2xl text-left"
+          aria-label={`Open ${project.title} website`}
         >
           <img
             src={project.img}
@@ -82,7 +85,7 @@ export function Work() {
           {project.seal ? (
             <Seal className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" />
           ) : null}
-        </button>
+        </a>
         <div className="mt-4 flex flex-wrap gap-2">
           {project.tags.map((tag) => (
             <span
@@ -118,7 +121,7 @@ export function Work() {
         <div className="grid items-start gap-8 md:grid-cols-3">
           <Card project={projects[0]!} className="md:pr-6" />
           <Card project={projects[1]!} className="md:mt-10" />
-         <Card project={projects[2]!} />
+          <Card project={projects[2]!} />
         </div>
 
         {/* <Card project={projects[2]!} /> */}
@@ -132,44 +135,6 @@ export function Work() {
       <div className="mt-14 flex justify-center">
         <PillButton>{t.work.viewAll}</PillButton>
       </div>
-
-      {/* Full-screen project lightbox */}
-      <Dialog open={selected !== null} onOpenChange={(open) => !open && setSelected(null)}>
-        <DialogContent className="left-0 top-0 flex h-dvh w-screen max-w-none translate-x-0 translate-y-0 flex-col items-center justify-center gap-0 rounded-none border-0 bg-black/95 p-4 sm:rounded-none sm:p-6">
-          {selected ? (
-            <>
-              <DialogClose className="absolute right-4 top-4 z-10 flex size-10 items-center justify-center rounded-full bg-white/10 text-white backdrop-blur transition-colors hover:bg-white/20">
-                <X className="size-5" />
-                <span className="sr-only">Close</span>
-              </DialogClose>
-
-              <img
-                src={selected.img}
-                alt={selected.title}
-                width={1600}
-                height={1200}
-                className="max-h-[calc(100dvh-10rem)] w-auto max-w-full rounded-xl object-contain"
-              />
-
-              <div className="mt-4 text-center">
-                <DialogTitle className="display font-medium! text-2xl text-white sm:text-3xl">
-                  {selected.title}
-                </DialogTitle>
-                <div className="mt-2 flex flex-wrap justify-center gap-2">
-                  {selected.tags.map((tag: string) => (
-                    <span
-                      key={tag}
-                      className="rounded-full border border-white/20 px-3 py-1 text-[11px] text-white/70"
-                    >
-                      {tag}
-                    </span>
-                  ))}
-                </div>
-              </div>
-            </>
-          ) : null}
-        </DialogContent>
-      </Dialog>
     </section>
   );
 }

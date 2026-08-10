@@ -7,6 +7,8 @@
 @theme {
   --font-display: "Anton", "Arial Narrow", sans-serif;
   --font-sans: "Poppins", ui-sans-serif, system-ui, sans-serif;
+  --font-display-ru: "Oswald", "Arial Narrow", sans-serif;
+  --font-sans-ru: "Manrope", ui-sans-serif, system-ui, sans-serif;
   --animate-marquee: marquee 28s linear infinite;
   --animate-marquee-rev: marquee-rev 28s linear infinite;
   --animate-spin-slow: spin 9s linear infinite;
@@ -234,6 +236,18 @@
   text-transform: uppercase;
   line-height: 0.9;
   letter-spacing: -0.01em;
+}
+
+/* Russian-specific fonts — applied only when the Russian language is active.
+   The I18nProvider sets document.documentElement.lang = "ru", so these rules
+   only take effect for Russian text. English and Uzbek keep their defaults. */
+html[lang="ru"] body {
+  font-family: var(--font-sans-ru);
+}
+
+html[lang="ru"] .display {
+  font-family: var(--font-display-ru);
+  font-weight: 500;
 }
 
 @utility eyebrow {
