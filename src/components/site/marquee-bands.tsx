@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import { Asterisk } from "lucide-react";
 import { useI18n } from "@/i18n/i18n";
 

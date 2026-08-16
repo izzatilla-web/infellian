@@ -4,6 +4,19 @@ import w2 from "@/assets/project-2.jpg";
 import w3 from "@/assets/project-3.jpg";
 import w4 from "@/assets/project-4.jpg";
 import w5 from "@/assets/project-5.jpg";
+import w6 from "@/assets/project-6.png";
+import w1ru from "@/assets/project-1-ru.jpg";
+import w2ru from "@/assets/project-2-ru.jpg";
+import w3ru from "@/assets/project-3-ru.jpg";
+import w4ru from "@/assets/project-4-ru.jpg";
+import w5ru from "@/assets/project-5-ru.jpg";
+import w6ru from "@/assets/project-6-ru.jpg";
+import w1en from "@/assets/project-1-en.jpg";
+import w2en from "@/assets/project-2-en.jpg";
+import w3en from "@/assets/project-3-en.jpg";
+import w4en from "@/assets/project-4-en.jpg";
+import w5en from "@/assets/project-5-en.jpg";
+import w6en from "@/assets/project-6-en.jpg";
 import { PillButton, Seal } from "./primitives";
 import { useI18n } from "@/i18n/i18n";
 import { cn } from "@/lib/utils";
@@ -24,21 +37,21 @@ export function Work() {
 
   const projects: Project[] = [
     {
-      img: w1,
+      img: ru ? w1ru : language === "en" ? w1en : w1,
       title: "Robivox",
       tags: [tags.uiUxDesign, tags.branding, tags.webDevelopment],
       ratio: "",
       url: "http://robivox.ru/",
     },
     {
-      img: w2,
+      img: ru ? w2ru : language === "en" ? w2en : w2,
       title: "SAMUR Group",
       tags: [tags.productDesign, tags.motion, tags.webDevelopment],
       ratio: "",
       url: "https://samur.group/",
     },
     {
-      img: w3,
+      img: ru ? w3ru : language === "en" ? w3en : w3,
       title: "SEO Computer",
       tags: [tags.webDevelopment, tags.visualIdentity],
       ratio: "",
@@ -46,18 +59,25 @@ export function Work() {
       url: "https://seo.computer/en",
     },
     {
-      img: w4,
+      img: ru ? w4ru : language === "en" ? w4en : w4,
       title: "Family Nest",
       tags: [tags.productDesign, tags.webDevelopment, tags.artDirection],
       ratio: "",
       url: "https://invest.familynest.com/",
     },
     {
-      img: w5,
+      img: ru ? w5ru : language === "en" ? w5en : w5,
       title: "BIG Corporation INDUSTRY",
       tags: [tags.brandDevelopment, tags.webDevelopment, tags.webIdentity],
       ratio: "",
       url: "https://aobig.ru/",
+    },
+       {
+      img: ru ? w6ru : language === "en" ? w6en : w6,
+      title: "edu.infellian",
+      tags: [tags.brandDevelopment, tags.webDevelopment, tags.webIdentity, tags.uiUxDesign],
+      ratio: "",
+      url: "https://edu.infellian.com/",
     },
   ];
 
@@ -129,6 +149,7 @@ export function Work() {
         <div className="grid items-start gap-8 md:grid-cols-[1fr_1fr_1fr]">
           <Card project={projects[3]!} className="" />
           <Card project={projects[4]!} className="md:mt-10" />
+          <Card project={projects[5]!} />
         </div>
       </div>
 

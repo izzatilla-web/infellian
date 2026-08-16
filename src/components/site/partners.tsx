@@ -8,6 +8,7 @@ const partnerLogos = [
   { name: "SEO Logo", src: "/seo_logo.svg" },
   { name: "Aobig", src: "/aobig.svg" },
   { name: "FamilyNest", src: "/familynest.png" },
+  { name: "edu.infellian", src: "/edu-infellian.png" },
 ];
 
 export function Partners() {
