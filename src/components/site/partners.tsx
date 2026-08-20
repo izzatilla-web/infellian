@@ -57,7 +57,7 @@ export function Partners() {
                 width={200}
                 height={60}
                 loading="lazy"
-                className="h-14 w-auto max-w-[200px] shrink-0 object-contain grayscale opacity-60 brightness-150 transition-all duration-300 hover:scale-110 hover:opacity-100 hover:brightness-100 hover:grayscale-0 md:h-16 md:max-w-[240px]"
+                className="h-14 w-auto max-w-50 shrink-0 object-contain grayscale opacity-60 brightness-150 transition-all duration-300 hover:scale-110 hover:opacity-100 hover:brightness-100 hover:grayscale-0 md:h-16 md:max-w-[240px]"
               />
             ))}
           </div>

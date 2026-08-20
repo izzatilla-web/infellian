@@ -1,5 +1,6 @@
 /* eslint-disable prettier/prettier */
 import { useState, type FormEvent } from "react";
+import { useServerFn } from "@tanstack/react-start";
 import { toast } from "sonner";
 import { Asterisk } from "lucide-react";
 import c1 from "@/assets/cta-11.jpg";
@@ -8,6 +9,7 @@ import c3 from "@/assets/cta-33.jpg";
 import c4 from "@/assets/cta-44.jpg";
 import c5 from "@/assets/cta-55.jpg";
 import { useI18n } from "@/i18n/i18n";
+import { submitContact } from "@/lib/contact-submit";
 import { cn } from "@/lib/utils";
 
 /**
@@ -69,9 +71,18 @@ export function ContactCta() {
   const ru = language === "ru";
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
+  const [website, setWebsite] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const submitContactFn = useServerFn(submitContact);
 
-  const submit = (e: FormEvent) => {
+  const submit = async (e: FormEvent) => {
     e.preventDefault();
+
+    if (website.trim()) {
+      toast.error(t.contact.spamRejected);
+      return;
+    }
+
     if (!name.trim()) {
       toast.error(t.contact.invalidName);
       return;
@@ -80,9 +91,29 @@ export function ContactCta() {
       toast.error(t.contact.invalidPhone);
       return;
     }
-    toast.success(t.contact.success);
-    setName("");
-    setPhone("");
+
+    setIsSubmitting(true);
+
+    try {
+      await submitContactFn({
+        data: {
+          name,
+          phone,
+          website,
+          language,
+        },
+      });
+
+      toast.success(t.contact.success);
+      setName("");
+      setPhone("");
+      setWebsite("");
+    } catch (error) {
+      const message = error instanceof Error ? error.message : t.contact.genericError;
+      toast.error(message);
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -101,7 +132,18 @@ export function ContactCta() {
           <form
             onSubmit={submit}
             className="mx-auto mt-8 flex max-w-md flex-col gap-2 rounded-xl bg-surface p-1.5"
+            noValidate
           >
+            <input
+              type="text"
+              name="website"
+              value={website}
+              onChange={(e) => setWebsite(e.target.value)}
+              className="hidden"
+              tabIndex={-1}
+              autoComplete="off"
+              aria-hidden="true"
+            />
             <div className="flex items-center gap-2">
               <label className="sr-only" htmlFor="cta-name">
                 {t.contact.nameLabel}
@@ -113,7 +155,9 @@ export function ContactCta() {
                 onChange={(e) => setName(e.target.value)}
                 placeholder={t.contact.namePlaceholder}
                 autoComplete="name"
-                className="min-w-0 flex-1 bg-transparent px-3 py-2 text-sm outline-none placeholder:text-muted-foreground"
+                maxLength={80}
+                disabled={isSubmitting}
+                className="min-w-0 flex-1 bg-transparent px-3 py-2 text-sm outline-none placeholder:text-muted-foreground disabled:opacity-60"
               />
             </div>
             <div className="flex items-center gap-2 border-t border-border/60 pt-1.5">
@@ -128,13 +172,16 @@ export function ContactCta() {
                 onChange={(e) => setPhone(formatPhone(e.target.value, phone))}
                 placeholder={t.contact.phonePlaceholder}
                 autoComplete="tel"
-                className="min-w-0 flex-1 bg-transparent px-3 py-2 text-sm outline-none placeholder:text-muted-foreground"
+                maxLength={18}
+                disabled={isSubmitting}
+                className="min-w-0 flex-1 bg-transparent px-3 py-2 text-sm outline-none placeholder:text-muted-foreground disabled:opacity-60"
               />
               <button
                 type="submit"
-                className="rounded-lg bg-brand px-4 py-2 text-sm font-medium text-brand-foreground transition-transform hover:-translate-y-0.5"
+                disabled={isSubmitting}
+                className="rounded-lg bg-brand px-4 py-2 text-sm font-medium text-brand-foreground transition-transform hover:-translate-y-0.5 disabled:cursor-not-allowed disabled:opacity-60"
               >
-                {t.contact.cta}
+                {isSubmitting ? t.contact.sending : t.contact.cta}
               </button>
             </div>
           </form>

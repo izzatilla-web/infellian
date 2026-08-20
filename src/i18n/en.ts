@@ -171,7 +171,7 @@ export const en = {
       {
         company: "Samur Group",
         quote:
-          "They built our resort real estate web catalog and connected it directly with our CRM sales pipeline. Inbound leads are instantly routed to our agents, doubling our sales team's closing efficiency.",
+          "They created a modern website that fully covers the company's activities and information about the team.",
       },
       {
         company: "SEO Computer",
@@ -186,7 +186,12 @@ export const en = {
       {
         company: "FamilyNest",
         quote:
-          "Creating an intuitive mobile app for parents to manage class enrollments and payments was key. Automated schedule updates and booking flows work like a charm.",
+          "They built our resort real estate web catalog and connected it directly with our CRM sales pipeline. Inbound leads are instantly routed to our agents, doubling our sales team's closing efficiency.",
+      },
+      {
+        company: "edu.infellian",
+        quote:
+          "An edu crm project that simplifies management for educational centers. Student management, payment statistics, group list, teacher list, all activities list, and the ability to manage them as you wish, all in one place. No paperwork required.",
       },
     ],
     stats: [
@@ -289,8 +294,18 @@ export const en = {
     marquee: "Let's build Together",
     nameLabel: "Your name",
     phoneLabel: "Phone number",
+    sending: "Sending...",
     invalidName: "Please enter your name.",
     invalidPhone: "Please enter a valid phone number.",
+    genericError: "Something went wrong.",
+    spamRejected: "Your request could not be processed.",
+    rateLimit: "Too many contact submissions. Please wait a minute and try again.",
+    configMissing: "The contact form is not configured yet.",
+    deliveryFailed: "The bot could not deliver your message.",
+    telegramTitle: "📩 New contact request",
+    telegramName: "Name",
+    telegramPhone: "Phone",
+    telegramSource: "Source: website contact form",
     success: "Thanks! We'll be in touch within one business day.",
   },
   footer: {

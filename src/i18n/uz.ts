@@ -173,7 +173,7 @@ export const uz: Translation = {
       {
         company: "Samur Group",
         quote:
-          "Kurort hududidagi bino va ob'ektlarimizni sotish uchun veb-katalog va CRM voronkasini bog'lab berishdi. Har bir kelgan lid darhol sotuv bo'limiga tushadi, agentlarimiz ishi 2 barobar osonlashdi.",
+          "Kompaniya faoliyatini va jamoa haqida ma'lumotlarni to'liq yoritib beruvchi zamonaviy vebsayt qilib berishdi.",
       },
       {
         company: "SEO Computer",
@@ -188,7 +188,12 @@ export const uz: Translation = {
       {
         company: "FamilyNest",
         quote:
-          "Ota-onalar uchun mobil ilova va bolalarni darslarga yozdirish tizimi juda tushunarli chiqdi. To'lovlar va dars jadvali avtomatik bildirishnomalar orqali ishlaydi, qo'llab-quvvatlash uchun rahmat.",
+          "Kurort hududidagi bino va ob'ektlarimizni sotish uchun veb-katalog va CRM voronkasini bog'lab berishdi. Har bir kelgan lid darhol sotuv bo'limiga tushadi, agentlarimiz ishi 2 barobar osonlashdi.",
+      },
+      {
+        company: "edu.infellian",
+        quote:
+          "O'quv markazlar uchun boshqaruv imkoniyatini yengillashtiruvchi, edu crm loyihasi. O'quvchilarni boshqarish, to'lov statistikalari, guruhlar ro'yxat , o'qituvchilar ro'yxati , barcha amallar ro'yxati, va ularni istalgancha boshqara olish imkoniyati, barchasi bir joyda. Hech qanday qog'ozlar shart emas.",
       },
     ],
     stats: [
@@ -291,8 +296,18 @@ export const uz: Translation = {
     marquee: "Keling, birga quramiz",
     nameLabel: "Ismingiz",
     phoneLabel: "Telefon raqami",
+    sending: "Yuborilmoqda...",
     invalidName: "Iltimos, ismingizni kiriting.",
     invalidPhone: "Iltimos, to'g'ri telefon raqamini kiriting.",
+    genericError: "Nimadir xato ketdi.",
+    spamRejected: "So'rovingizni qayta ishlab bo'lmadi.",
+    rateLimit: "Juda ko'p so'rov yuborildi. Bir daqiqa kutib, qaytadan urinib ko'ring.",
+    configMissing: "Aloqa formasi hali sozlanmagan.",
+    deliveryFailed: "Bot xabarni yetkaza olmadi.",
+    telegramTitle: "📩 Yangi murojaat",
+    telegramName: "Ism",
+    telegramPhone: "Telefon",
+    telegramSource: "Manba: veb-sayt orqali aloqa formasi",
     success: "Rahmat! Bir ish kuni ichida siz bilan bog'lanamiz.",
   },
   footer: {

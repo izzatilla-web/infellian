@@ -13,4 +13,9 @@ export default defineConfig({
     // nitro/vite builds from this
     server: { entry: "server" },
   },
+  // Build for Node.js instead of the default Cloudflare Workers preset so the
+  // output can run on a plain Ubuntu server with `node .output/server/index.mjs`.
+  nitro: {
+    preset: "node-server",
+  },
 });

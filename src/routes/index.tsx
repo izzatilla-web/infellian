@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import { createFileRoute } from "@tanstack/react-router";
 import { I18nProvider } from "@/i18n/i18n";
 import { Nav } from "@/components/site/nav";
