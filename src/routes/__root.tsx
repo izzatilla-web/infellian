@@ -7,11 +7,9 @@ import {
   HeadContent,
   Scripts,
 } from "@tanstack/react-router";
-import { useEffect, type ReactNode } from "react";
+import type { ReactNode } from "react";
 
-// import appCss from "../styles.css";
 import "../styles.css";
-// import { reportLovableError } from "../lib/lovable-error-reporting";
 import { Toaster } from "@/components/ui/sonner";
 
 function NotFoundComponent() {
@@ -19,10 +17,15 @@ function NotFoundComponent() {
     <div className="flex min-h-screen items-center justify-center bg-background px-4">
       <div className="max-w-md text-center">
         <h1 className="text-7xl font-bold text-foreground">404</h1>
-        <h2 className="mt-4 text-xl font-semibold text-foreground">Page not found</h2>
+
+        <h2 className="mt-4 text-xl font-semibold text-foreground">
+          Page not found
+        </h2>
+
         <p className="mt-2 text-sm text-muted-foreground">
           The page you're looking for doesn't exist or has been moved.
         </p>
+
         <div className="mt-6">
           <Link
             to="/"
@@ -36,12 +39,16 @@ function NotFoundComponent() {
   );
 }
 
-function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
+function ErrorComponent({
+  error,
+  reset,
+}: {
+  error: Error;
+  reset: () => void;
+}) {
   console.error(error);
+
   const router = useRouter();
-  // useEffect(() => {
-  //   reportLovableError(error, { boundary: "tanstack_root_error_component" });
-  // }, [error]);
 
   return (
     <div className="flex min-h-screen items-center justify-center bg-background px-4">
@@ -49,9 +56,12 @@ function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
         <h1 className="text-xl font-semibold tracking-tight text-foreground">
           This page didn't load
         </h1>
+
         <p className="mt-2 text-sm text-muted-foreground">
-          Something went wrong on our end. You can try refreshing or head back home.
+          Something went wrong on our end. You can try refreshing or head back
+          home.
         </p>
+
         <div className="mt-6 flex flex-wrap justify-center gap-2">
           <button
             onClick={() => {
@@ -62,6 +72,7 @@ function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
           >
             Try again
           </button>
+
           <a
             href="/"
             className="inline-flex items-center justify-center rounded-md border border-input bg-background px-4 py-2 text-sm font-medium text-foreground transition-colors hover:bg-accent"
@@ -74,7 +85,9 @@ function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
   );
 }
 
-export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()({
+export const Route = createRootRouteWithContext<{
+  queryClient: QueryClient;
+}>()({
   head: () => ({
     meta: [
       {
@@ -96,8 +109,6 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         name: "author",
         content: "Infellian",
       },
-
-      // Canonical
       {
         name: "robots",
         content: "index, follow",
@@ -122,22 +133,26 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         content: "https://infellian.com/",
       },
       {
+        property: "og:site_name",
+        content: "Infellian",
+      },
+      {
         property: "og:image",
         content: "https://infellian.com/logo.png",
       },
       {
-        property: "og:site_name",
-        content: "Infellian",
+        property: "og:image:alt",
+        content: "Infellian logo",
+      },
+      {
+        property: "og:locale",
+        content: "en_US",
       },
 
-      // Twitter
+      // Twitter / X
       {
         name: "twitter:card",
         content: "summary_large_image",
-      },
-      {
-        name: "twitter:site",
-        content: "@infellian",
       },
       {
         name: "twitter:title",
@@ -152,6 +167,20 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         name: "twitter:image",
         content: "https://infellian.com/logo.png",
       },
+      {
+        name: "twitter:image:alt",
+        content: "Infellian logo",
+      },
+      {
+        name: "twitter:site",
+        content: "@infellian",
+      },
+
+      // Theme
+      {
+        name: "theme-color",
+        content: "#ffffff",
+      },
     ],
 
     links: [
@@ -159,23 +188,32 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         rel: "canonical",
         href: "https://infellian.com/",
       },
+
       {
         rel: "preconnect",
         href: "https://fonts.googleapis.com",
       },
+
       {
         rel: "preconnect",
         href: "https://fonts.gstatic.com",
         crossOrigin: "anonymous",
       },
+
       {
         rel: "stylesheet",
         href: "https://fonts.googleapis.com/css2?family=Anton&family=Poppins:wght@300;400;500;600&family=Oswald:wght@400;500;600&family=Manrope:wght@300;400;500;600&display=swap",
       },
+
       {
         rel: "icon",
         href: "/favicon.ico",
         type: "image/x-icon",
+      },
+
+      {
+        rel: "apple-touch-icon",
+        href: "/logo.png",
       },
     ],
 
@@ -184,28 +222,116 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         type: "application/ld+json",
         children: JSON.stringify({
           "@context": "https://schema.org",
-          "@type": "Organization",
-          "@id": "https://infellian.com/#organization",
-          name: "Infellian",
-          alternateName: "Infellian Digital Agency",
-          url: "https://infellian.com/",
-          logo: "https://infellian.com/logo.png",
-          description:
-            "Infellian is a creative digital agency building brands, websites and digital products.",
-        }),
-      },
+          "@graph": [
+            {
+              "@type": "Organization",
+              "@id": "https://infellian.com/#organization",
 
-      {
-        type: "application/ld+json",
-        children: JSON.stringify({
-          "@context": "https://schema.org",
-          "@type": "WebSite",
-          "@id": "https://infellian.com/#website",
-          name: "Infellian",
-          url: "https://infellian.com/",
-          publisher: {
-            "@id": "https://infellian.com/#organization",
-          },
+              name: "Infellian",
+
+              url: "https://infellian.com/",
+
+              description:
+                "Infellian is a creative digital agency building brands, websites and digital products.",
+
+              logo: {
+                "@type": "ImageObject",
+                "@id": "https://infellian.com/#logo",
+                url: "https://infellian.com/logo.png",
+                contentUrl: "https://infellian.com/logo.png",
+              },
+
+              foundingDate: "2023",
+
+              founder: {
+                "@id": "https://infellian.com/#founder",
+              },
+
+              telephone: "+998974249484",
+
+              email: "infellian@gmail.com",
+
+              address: {
+                "@type": "PostalAddress",
+                addressLocality: "Tashkent",
+                addressCountry: "UZ",
+              },
+
+              sameAs: [
+                "https://www.instagram.com/infellian",
+                "https://t.me/infellian",
+              ],
+
+              contactPoint: {
+                "@type": "ContactPoint",
+                contactType: "customer service",
+                telephone: "+998974249484",
+                email: "infellian@gmail.com",
+                availableLanguage: ["English", "Uzbek", "Russian"],
+              },
+            },
+
+            {
+              "@type": "Person",
+              "@id": "https://infellian.com/#founder",
+
+              name: "Izzatilla Fayzullayev",
+
+              jobTitle: "Founder",
+
+              worksFor: {
+                "@id": "https://infellian.com/#organization",
+              },
+            },
+
+            {
+              "@type": "WebSite",
+              "@id": "https://infellian.com/#website",
+
+              name: "Infellian",
+
+              url: "https://infellian.com/",
+
+              description:
+                "Infellian is a creative digital agency building brands, websites and digital products.",
+
+              publisher: {
+                "@id": "https://infellian.com/#organization",
+              },
+
+              inLanguage: "en",
+            },
+
+            {
+              "@type": "WebPage",
+              "@id": "https://infellian.com/#webpage",
+
+              url: "https://infellian.com/",
+
+              name: "Infellian — Creative Digital Agency",
+
+              description:
+                "Infellian is a creative digital agency building brands, websites and digital products.",
+
+              isPartOf: {
+                "@id": "https://infellian.com/#website",
+              },
+
+              about: {
+                "@id": "https://infellian.com/#organization",
+              },
+
+              publisher: {
+                "@id": "https://infellian.com/#organization",
+              },
+
+              mainEntity: {
+                "@id": "https://infellian.com/#organization",
+              },
+
+              inLanguage: "en",
+            },
+          ],
         }),
       },
     ],
@@ -218,46 +344,10 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
 });
 
 function RootShell({ children }: { children: ReactNode }) {
-  const organizationSchema = {
-    "@context": "https://schema.org",
-    "@type": "Organization",
-    "@id": "https://infellian.com/#organization",
-    name: "Infellian",
-    url: "https://infellian.com/",
-    logo: "https://infellian.com/logo.png",
-    description:
-      "Infellian is a creative digital agency building brands, websites and digital products.",
-  };
-
-  const websiteSchema = {
-    "@context": "https://schema.org",
-    "@type": "WebSite",
-    "@id": "https://infellian.com/#website",
-    name: "Infellian",
-    url: "https://infellian.com/",
-    publisher: {
-      "@id": "https://infellian.com/#organization",
-    },
-  };
-
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
         <HeadContent />
-
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify(organizationSchema),
-          }}
-        />
-
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify(websiteSchema),
-          }}
-        />
       </head>
 
       <body suppressHydrationWarning>
@@ -273,7 +363,6 @@ function RootComponent() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
       <Outlet />
       <Toaster />
     </QueryClientProvider>
