@@ -218,11 +218,48 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
 });
 
 function RootShell({ children }: { children: ReactNode }) {
+  const organizationSchema = {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "@id": "https://infellian.com/#organization",
+    name: "Infellian",
+    url: "https://infellian.com/",
+    logo: "https://infellian.com/logo.png",
+    description:
+      "Infellian is a creative digital agency building brands, websites and digital products.",
+  };
+
+  const websiteSchema = {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "@id": "https://infellian.com/#website",
+    name: "Infellian",
+    url: "https://infellian.com/",
+    publisher: {
+      "@id": "https://infellian.com/#organization",
+    },
+  };
+
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
         <HeadContent />
+
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(organizationSchema),
+          }}
+        />
+
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(websiteSchema),
+          }}
+        />
       </head>
+
       <body suppressHydrationWarning>
         {children}
         <Scripts />
