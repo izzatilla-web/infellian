@@ -77,39 +77,140 @@ function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
 export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()({
   head: () => ({
     meta: [
-      { charSet: "utf-8" },
-      { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Infellian — Creative Digital Agency" },
+      {
+        charSet: "utf-8",
+      },
+      {
+        name: "viewport",
+        content: "width=device-width, initial-scale=1",
+      },
+      {
+        title: "Infellian — Creative Digital Agency",
+      },
       {
         name: "description",
         content:
           "Infellian is a creative digital agency building brands, websites and digital products.",
       },
-      { name: "author", content: "Infellian" },
-      { property: "og:title", content: "Infellian — Creative Digital Agency" },
+      {
+        name: "author",
+        content: "Infellian",
+      },
+
+      // Canonical
+      {
+        name: "robots",
+        content: "index, follow",
+      },
+
+      // Open Graph
+      {
+        property: "og:title",
+        content: "Infellian — Creative Digital Agency",
+      },
       {
         property: "og:description",
         content:
           "Infellian is a creative digital agency building brands, websites and digital products.",
       },
-      { property: "og:type", content: "website" },
-      { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:site", content: "@infellian" },
+      {
+        property: "og:type",
+        content: "website",
+      },
+      {
+        property: "og:url",
+        content: "https://infellian.com/",
+      },
+      {
+        property: "og:image",
+        content: "https://infellian.com/logo.png",
+      },
+      {
+        property: "og:site_name",
+        content: "Infellian",
+      },
+
+      // Twitter
+      {
+        name: "twitter:card",
+        content: "summary_large_image",
+      },
+      {
+        name: "twitter:site",
+        content: "@infellian",
+      },
+      {
+        name: "twitter:title",
+        content: "Infellian — Creative Digital Agency",
+      },
+      {
+        name: "twitter:description",
+        content:
+          "Infellian is a creative digital agency building brands, websites and digital products.",
+      },
+      {
+        name: "twitter:image",
+        content: "https://infellian.com/logo.png",
+      },
     ],
+
     links: [
-      // {
-      //   rel: "stylesheet",
-      //   href: appCss,
-      // },
-      { rel: "preconnect", href: "https://fonts.googleapis.com" },
-      { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
+      {
+        rel: "canonical",
+        href: "https://infellian.com/",
+      },
+      {
+        rel: "preconnect",
+        href: "https://fonts.googleapis.com",
+      },
+      {
+        rel: "preconnect",
+        href: "https://fonts.gstatic.com",
+        crossOrigin: "anonymous",
+      },
       {
         rel: "stylesheet",
         href: "https://fonts.googleapis.com/css2?family=Anton&family=Poppins:wght@300;400;500;600&family=Oswald:wght@400;500;600&family=Manrope:wght@300;400;500;600&display=swap",
       },
-      { rel: "icon", href: "/favicon.ico", type: "image/x-icon" },
+      {
+        rel: "icon",
+        href: "/favicon.ico",
+        type: "image/x-icon",
+      },
+    ],
+
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "@id": "https://infellian.com/#organization",
+          name: "Infellian",
+          alternateName: "Infellian Digital Agency",
+          url: "https://infellian.com/",
+          logo: "https://infellian.com/logo.png",
+          description:
+            "Infellian is a creative digital agency building brands, websites and digital products.",
+        }),
+      },
+
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "WebSite",
+          "@id": "https://infellian.com/#website",
+          name: "Infellian",
+          url: "https://infellian.com/",
+          publisher: {
+            "@id": "https://infellian.com/#organization",
+          },
+        }),
+      },
     ],
   }),
+
   shellComponent: RootShell,
   component: RootComponent,
   notFoundComponent: NotFoundComponent,
